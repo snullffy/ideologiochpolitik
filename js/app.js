@@ -101,42 +101,18 @@
   }
 
   function layout(inner) {
-    const nav = NAV_ITEMS.map(function (item) {
-      const active = App.route === item.id ? " active" : "";
-      return (
-        '<button type="button" class="nav-btn' +
-        active +
-        '" data-nav="' +
-        item.id +
-        '">' +
-        escapeHtml(item.label) +
-        "</button>"
-      );
+    const chips = NAV_ITEMS.map(function (item) {
+      return '<button type="button" class="chip' + (App.route === item.id ? " active" : "") + '" data-nav="' + item.id + '">' + escapeHtml(item.label) + "</button>";
     }).join("");
-
     return (
-      '<div class="app">' +
-      '<div class="backdrop' +
-      (App.menuOpen ? " show" : "") +
-      '" data-action="close-menu"></div>' +
-      '<aside class="sidebar' +
-      (App.menuOpen ? " open" : "") +
-      '">' +
-      '<div class="brand"><div class="brand-title">Ideologi &amp; politik</div>' +
-      '<div class="brand-sub">Samhällskunskap nivå 1 · TE26</div></div>' +
-      '<nav class="nav">' +
-      nav +
-      "</nav>" +
-      '<div class="side-foot">Valspecial<br>Aktiv återkallning · Teknikprogrammet</div>' +
-      "</aside>" +
-      '<div class="main">' +
       '<header class="topbar">' +
-      '<button class="menu-toggle" data-action="menu" aria-label="Öppna meny"><span></span><span></span><span></span></button>' +
-      '<div class="topbar-title">Ideologi &amp; politik</div>' +
+      '<div class="topbar-inner">' +
+      '<button type="button" class="brand" data-nav="home" aria-label="Till startsidan"><span class="brand-mark">S1</span><span class="brand-name">Ideologi &amp; politik</span></button>' +
+      '<a class="mast-link lib-link" href="https://isaksplugglibary.vercel.app">Bibliotek</a>' +
+      "</div>" +
+      '<div class="topbar-inner chip-row">' + chips + "</div>" +
       "</header>" +
-      '<main class="content">' +
-      inner +
-      "</main></div></div>"
+      '<main class="content">' + inner + "</main>"
     );
   }
 
@@ -157,15 +133,7 @@
   }
 
   function modeCard(route, title, desc) {
-    return (
-      '<button type="button" class="mode-link" data-go="' +
-      route +
-      '"><strong>' +
-      escapeHtml(title) +
-      "</strong><span>" +
-      escapeHtml(desc) +
-      "</span></button>"
-    );
+    return '<button type="button" class="btn" data-go="' + route + '"><span>' + escapeHtml(title) + "<small>" + escapeHtml(desc) + "</small></span></button>";
   }
 
   function renderHome() {
